@@ -7,3 +7,14 @@ export function getList(params) {
     params
   })
 }
+
+export function login(phone, code) {
+  return fetch({
+    url: '/login',
+    methods: 'post',
+    data: {
+      phone,
+      code
+    }
+  })
+}
