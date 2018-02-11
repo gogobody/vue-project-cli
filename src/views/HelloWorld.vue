@@ -10,6 +10,11 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    chargeDetail() {
+      return this.$store.getters.chargeDetail
+    }
+  },
   methods: {
     login() {
       let data = {
