@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+import store from '../store/index'
 
 Vue.use(Router)
 
@@ -10,7 +10,10 @@ const routes = [
   {
     path: '/',
     name: 'HelloWorld',
-    component: HelloWorld
+    component: HelloWorld,
+    meta: {
+      title: 'HELLO'
+    }
   }
 ]
 
@@ -39,10 +42,17 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
+  store.commit('updateLoadingStatus', {
+    isLoading: true,
+  });
+  store.commit('setNetState', false);
   next()
 })
 
 router.afterEach((to) => {
+  store.commit('updateLoadingStatus', {
+    isLoading: false,
+  });
 })
 
 export default router

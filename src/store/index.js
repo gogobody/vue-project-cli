@@ -7,10 +7,18 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-
+    isLoading: false,
+    requestState: false,
   },
   mutations: {
-
+    // 加载动画
+    updateLoadingStatus(state, payload) {
+      state.isLoading = payload.isLoading;
+    },
+    // 控制页面渲染
+    setNetState(state, requestState) {
+      state.requestState = requestState;
+    },
   },
   actions: {
 

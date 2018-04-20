@@ -3,12 +3,22 @@
     <transition name="router-fade" mode="out-in">
       <router-view/>
     </transition>
+    <loading v-model="isLoading" text=""></loading>
   </div>
 </template>
 
 <script>
+import { Loading } from 'vux'
 export default {
-  name: "app"
+  name: "app",
+  components: {
+    Loading
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading
+    },
+  },
 };
 </script>
 

@@ -4,7 +4,9 @@ export function getList(params) {
   return fetch({
     url: '/table/list',
     methods: 'get',
-    params
+    params,
+    headers: {
+    }
   })
 }
 
@@ -15,6 +17,15 @@ export function login(phone, code) {
     data: {
       phone,
       code
+    }
+  })
+}
+
+export function getCode(phone) {
+  return fetch.post('/code', {
+    phone
+  }, {
+    headers: {
     }
   })
 }

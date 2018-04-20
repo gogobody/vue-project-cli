@@ -1,6 +1,6 @@
-# wechatpark
+# vue-mh-cli
 
-> 项目架构借鉴了element-admin搭建而成，目录十分清晰，空框架，便于快速开发。封装了axios，便于api管理，并添加了拦截器功能。路由添加了拦截器功能。vuex状态机使用了state，getters，mutations，actions，modules
+> A Vue.js project
 
 ## Build Setup
 

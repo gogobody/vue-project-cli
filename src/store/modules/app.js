@@ -26,6 +26,7 @@ const app = {
       let res = await login(payload.phone, payload.code)
       if (res.flag) {
         commit('LOGIN', res.data)
+        commit('setNetState', true)
         router.push('/')
       }
     }

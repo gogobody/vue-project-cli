@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div v-show="requestState" class="hello">
    HelloWorld
   </div>
 </template>
@@ -13,7 +13,10 @@ export default {
   computed: {
     chargeDetail() {
       return this.$store.getters.chargeDetail
-    }
+    },
+    requestState() {
+      return this.$store.state.requestState;
+    },
   },
   methods: {
     login() {
