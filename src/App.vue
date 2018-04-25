@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <transition name="router-fade" mode="out-in">
+    <!-- 渐变动画 -->
+    <!-- <transition name="router-fade" mode="out-in">
+      <router-view/>
+    </transition> -->
+    <!-- 翻页动画 -->
+    <transition :css="!!direction" :name="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')">
       <router-view/>
     </transition>
     <loading v-model="isLoading" text=""></loading>
@@ -10,7 +15,7 @@
 <script>
 import { Loading } from 'vux'
 export default {
-  name: "app",
+  name: "App",
   components: {
     Loading
   },
@@ -18,13 +23,16 @@ export default {
     isLoading() {
       return this.$store.state.isLoading
     },
+    direction() {
+      return this.$store.state.direction
+    },
   },
 };
 </script>
 
 <style lang="scss">
 @import './styles/common.scss';
-
+// 渐变动画
 .router-fade-leave-active,
 .router-fade-enter-active {
   transition: opacity 0.3s;
@@ -32,5 +40,38 @@ export default {
 .router-fade-enter,
 .router-fade-leave {
   opacity: 0;
+}
+// 翻页动画
+.vux-pop-out-enter-active,
+.vux-pop-out-leave-active,
+.vux-pop-in-enter-active,
+.vux-pop-in-leave-active {
+  will-change: transform;
+  transition: all 250ms;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+.vux-pop-out-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.vux-pop-out-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.vux-pop-in-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.vux-pop-in-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
+<div>
   <div v-show="requestState" class="hello">
    HelloWorld
   </div>
+  <router-link to="/hellochongqing">Go to hellochongqing</router-link>
+</div>
 </template>
 
 <script>
