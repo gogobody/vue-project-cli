@@ -1,34 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store/index'
+import routes from './routers'
+import store from '@/store'
 
 Vue.use(Router)
-
-const HelloWorld = () =>
-  import ('@/views/HelloWorld')
-const HelloChongQing = () =>
-  import ('@/views/HelloChongQing')
-
-const routes = [{
-  path: '/',
-  name: 'HelloWorld',
-  component: HelloWorld,
-  meta: {
-    title: 'HELLO'
-  }
-}, {
-  path: '/hellochongqing',
-  name: 'HelloChongQing',
-  component: HelloChongQing,
-  meta: {
-    title: 'HelloChongQing'
-  }
-}]
-
 const router = new Router({
   routes
 })
 
+// 微信翻页动画
 const history = window.sessionStorage
 history.clear()
 let historyCount = history.getItem('count') * 1 || 0
@@ -40,13 +20,14 @@ let methods = ['push', 'go', 'replace', 'forward', 'back']
 document.addEventListener('touchend', () => {
   endTime = Date.now()
 })
+
 methods.forEach(key => {
   let method = router[key].bind(router)
   router[key] = function (...args) {
-      isPush = true
-      method.apply(null, args)
-    }
-    // console.log(method)
+    isPush = true
+    method.apply(null, args)
+  }
+  // console.log(method)
 })
 
 router.beforeEach((to, from, next) => {
@@ -105,17 +86,11 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
-  store.commit('updateLoadingStatus', {
-    isLoading: true
-  })
-  store.commit('setNetState', false)
   next()
 })
 
-router.afterEach((to) => {
-  store.commit('updateLoadingStatus', {
-    isLoading: false
-  })
+router.afterEach(to => {
+  window.scrollTo(0, 0)
 })
 
 export default router

@@ -24,7 +24,7 @@ export default {
       return this.$store.state.isLoading
     },
     direction() {
-      return this.$store.state.direction
+      return this.$store.state.app.direction
     },
   },
 };

@@ -1,31 +1,30 @@
-import fetch from '@/config/fetch'
+import axios from '@/libs/api.request'
 
-export function getList(params) {
-  return fetch({
-    url: '/table/list',
-    methods: 'get',
-    params,
-    headers: {
-    }
+export const login = ({ userName, password }) => {
+  const data = {
+    userName,
+    password
+  }
+  return axios.request({
+    url: 'login',
+    data,
+    method: 'post'
   })
 }
 
-export function login(phone, code) {
-  return fetch({
-    url: '/login',
-    methods: 'post',
-    data: {
-      phone,
-      code
-    }
+export const getUserInfo = (token) => {
+  return axios.request({
+    url: 'get_info',
+    params: {
+      token
+    },
+    method: 'get'
   })
 }
 
-export function getCode(phone) {
-  return fetch.post('/code', {
-    phone
-  }, {
-    headers: {
-    }
+export const logout = (token) => {
+  return axios.request({
+    url: 'logout',
+    method: 'post'
   })
 }

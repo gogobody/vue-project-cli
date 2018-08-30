@@ -24,7 +24,7 @@ Validator.extend('phone', {
     zh_CN: field => '手机号格式不正确'
   },
   validate: value => {
-    return value.length === 11 && /^1[34578]\d{9}$/.test(value)
+    return value.length === 11 && /^\d{11}$/.test(value)
   }
 })
 Validator.extend('code', {
